@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2c5ab4">
+  <meta name="description" content="依孩子日常表現、家長希望獲得的協助與所在縣市，查找臺灣國小學童與家庭可聯繫的公開資源。">
+  <title>童路 ChildPath｜PDIS 設計系統版</title>
+  <link rel="stylesheet" href="css/pdis-design-system.min.css">
+  <link rel="stylesheet" href="css/childpath-pdis.css">
+</head>
+<body>
+  <a class="pdis-skip-link" href="#main">跳至主要內容</a>
+
+  <header class="pdis-header">
+    <div class="pdis-container pdis-header-inner">
+      <button type="button" id="brandHome" class="pdis-brand-btn" aria-label="童路 ChildPath 內部預覽，回到資源導引">
+        <span class="pdis-brand-badge" aria-hidden="true"><i class="bi bi-compass"></i></span>
+        <span class="pdis-brand-zh">童路</span>
+        <span lang="en" class="pdis-brand-en">ChildPath</span>
+        <span class="badge pdis-preview-badge">試營運版</span>
+      </button>
+
+      <div class="pdis-header-actions pdis-btn-row">
+        <button type="button" id="openFeedbackBtn" class="btn pdis-btn-outline"><i class="bi bi-chat-square-text" aria-hidden="true"></i> 匿名回饋</button>
+        <button type="button" id="openLegalBtn" class="btn pdis-btn-outline"><i class="bi bi-shield-check" aria-hidden="true"></i> 隱私說明</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="pdis-container pdis-main" tabindex="-1">
+    <noscript><div class="pdis-alert pdis-alert-warn">請開啟瀏覽器的 JavaScript，以使用資源導引與搜尋功能。</div></noscript>
+    <div id="dataFeedback" class="pdis-alert pdis-alert-info" hidden>
+      <span id="dataStatus" role="status"></span>
+      <button type="button" class="btn btn-brand" id="retryDataBtn" hidden>重新載入資料</button>
+    </div>
+
+    <section id="wizardSection" aria-labelledby="wizardHeading">
+      <div id="hero" class="pdis-hero">
+        <div class="pdis-hero-copy">
+          <span class="badge pdis-eyebrow">國小學童與家庭支持資源導航</span>
+          <h1>陪孩子找到合適的支持資源</h1>
+          <p>從你觀察到的日常困難出發，釐清這次想獲得的協助，找可以先詢問的學校、醫療或社區窗口。</p>
+        </div>
+        <div class="pdis-hero-media">
+          <img src="images/pexels-photo-35128446.webp" width="960" height="640" alt="四位穿制服的學童並肩坐在校園矮牆上">
+        </div>
+      </div>
+
+      <div class="pdis-panel">
+        <div class="pdis-panel-head">
+          <h2 class="pdis-panel-title" id="wizardHeading">家庭資源導引</h2>
+          <button type="button" class="btn pdis-btn-outline" id="skipToAllBtn">
+            瀏覽全部資源 <span id="totalCountBadge" class="badge pdis-count-badge"></span> <i class="bi bi-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="pdis-panel-body">
+          <nav aria-label="導引進度">
+            <ol class="pdis-steps">
+              <li id="prog-1" class="step-item is-active" aria-current="step"><span class="step-num">1</span><span>孩子的困難</span></li>
+              <li id="prog-2" class="step-item"><span class="step-num">2</span><span>希望的協助</span></li>
+              <li id="prog-3" class="step-item"><span class="step-num">3</span><span>所在地區</span></li>
+            </ol>
+          </nav>
+
+          <form id="wizardForm">
+            <!-- Step 1 -->
+            <div id="step-1" class="wizard-step">
+              <div class="pdis-step-head">
+                <div>
+                  <h3 id="step1Heading" tabindex="-1" class="pdis-step-title">孩子在哪些日常活動遇到困難？</h3>
+                  <p class="pdis-step-desc">可複選，也可直接到下一步。沒有診斷也可以查詢。</p>
+                </div>
+                <label class="pdis-switch">
+                  <input type="checkbox" id="examples1" checked>
+                  <span>顯示生活例子</span>
+                </label>
+              </div>
+
+              <div class="guide-choices">
+                <fieldset class="choice-group">
+                  <legend>專注與做事</legend>
+                  <div class="choice-list">
+                    <label class="option-card"><input type="checkbox" name="l1" value="L1-01">
+                      <span class="option-body"><strong>注意與衝動控制</strong><small>做事容易分心、漏看交代；輪流或等候時容易插話。</small></span></label>
+                    <label class="option-card"><input type="checkbox" name="l1" value="L1-02">
+                      <span class="option-body"><strong>安排、記住與完成事情</strong><small>常忘記攜帶用品；知道要做什麼，卻難以開始、排順序或做完多步驟作業。</small></span></label>
+                  </div>
+                </fieldset>
+                <fieldset class="choice-group">
+                  <legend>讀寫與數學</legend>
+                  <div class="choice-list">
+                    <label class="option-card"><input type="checkbox" name="l1" value="L1-03">
+                      <span class="option-body"><strong>閱讀</strong><small>認字、讀一段文字或理解內容吃力；也可能讀得慢。</small></span></label>
+                    <label class="option-card"><input type="checkbox" name="l1" value="L1-04">
+                      <span class="option-body"><strong>寫字時的手部操作</strong><small>寫字慢、字形難控制，寫一會兒覺得累，或使用學用品費力。</small></span></label>
+                    <label class="option-card"><input type="checkbox" name="l1" value="L1-05">
+                      <span class="option-body"><strong>寫出字詞與想法</strong><small>容易漏寫或寫錯字；有想法卻難以整理成句子、段落。</small></span></label>
+                    <label class="option-card"><input type="checkbox" name="l1" value="L1-06">
+                      <span class="option-body"><strong>數學</strong><small>理解數量、計算步驟或數學題意時需要較多協助。</small></span></label>
+                  </div>
+                </fieldset>
+                <fieldset class="choice-group">
+                  <legend>聽懂與表達</legend>
+                  <div class="choice-list">
+                    <label class="option-card"><input type="checkbox" name="l1" value="L1-07">
+                      <span class="option-body"><strong>聽懂口語說明</strong><small>別人說明或交代幾件事時，常需要重說、拆成短句。</small></span></label>
+                    <label class="option-card"><input type="checkbox" name="l1" value="L1-08">
+                      <span class="option-body"><strong>用口語說明想法</strong><small>找詞、說清楚需求，或依序講述一件事時較吃力。</small></span></label>
+                  </div>
+                </fieldset>
+                <fieldset class="choice-group">
+                  <legend>情緒與同儕</legend>
+                  <div class="choice-list">
+                    <label class="option-card"><input type="checkbox" name="l1" value="L1-09">
+                      <span class="option-body"><strong>情緒與挫折適應</strong><small>面對作業、失敗或上學情境時，容易擔心、難過或難以平復。</small></span></label>
+                    <label class="option-card"><input type="checkbox" name="l1" value="L1-10">
+                      <span class="option-body"><strong>同儕互動</strong><small>加入團體、輪流、理解同學反應或維持友誼時遇到困難。</small></span></label>
+                  </div>
+                </fieldset>
+                <fieldset class="choice-group">
+                  <legend>其他情況</legend>
+                  <div class="choice-list">
+                    <label class="option-card"><input type="checkbox" id="l1Other">
+                      <span class="option-body"><strong>還有其他困難</strong><small>清單裡沒有合適的描述，仍可依想要的協助找資源。</small></span></label>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="pdis-wizard-footer">
+                <div class="pdis-btn-row">
+                  <span class="selection-note" id="selection1">尚未選擇</span>
+                  <button type="button" id="clearStep1Btn" class="btn pdis-btn-outline">清空選項</button>
+                </div>
+                <button type="button" id="toStep2Btn" class="btn btn-brand">下一步：選協助 <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div id="step-2" class="wizard-step" hidden>
+              <div class="pdis-step-head">
+                <div>
+                  <h3 id="step2Heading" tabindex="-1" class="pdis-step-title">這一次，你希望獲得什麼協助？</h3>
+                  <p class="pdis-step-desc">可以複選。例如孩子寫字慢，你可以同時勾選「希望學校協助」和「了解是否需要評估」。</p>
+                </div>
+                <label class="pdis-switch">
+                  <input type="checkbox" id="examples2" checked>
+                  <span>顯示選項說明</span>
+                </label>
+              </div>
+
+              <div class="guide-choices">
+                <fieldset class="choice-group">
+                  <legend>釐清狀況與評估</legend>
+                  <div class="choice-list">
+                    <label class="option-card"><input type="checkbox" name="l2" value="L2-01">
+                      <span class="option-body"><strong>先找人談談，釐清狀況與下一步</strong><small>低門檻諮詢或資源指引，先聽聽專業或輔導人員建議。</small></span></label>
+                    <label class="option-card"><input type="checkbox" name="l2" value="L2-02">
+                      <span class="option-body"><strong>了解孩子是否需要評估、該怎麼安排</strong><small>想先知道評估的必要性、流程與準備方向。</small></span></label>
+                    <label class="option-card"><input type="checkbox" name="l2" value="L2-03">
+                      <span class="option-body"><strong>尋找較完整的專業評估</strong><small>包含醫療門診、心理衡鑑、聯評或學校特教鑑定入口。</small></span></label>
+                  </div>
+                </fieldset>
+                <fieldset class="choice-group">
+                  <legend>學校與專業支持</legend>
+                  <div class="choice-list">
+                    <label class="option-card"><input type="checkbox" name="l2" value="L2-04">
+                      <span class="option-body"><strong>希望學校協助學習、情緒或人際適應</strong><small>了解校內輔導室、資源班、特教資源中心支持路徑。</small></span></label>
+                    <label class="option-card"><input type="checkbox" name="l2" value="L2-05">
+                      <span class="option-body"><strong>了解或安排適合孩子的介入／治療</strong><small>已評估或想了解職能、語言、心理等後續介入服務。</small></span></label>
+                    <label class="option-card"><input type="checkbox" name="l2" value="L2-06">
+                      <span class="option-body"><strong>希望孩子得到情緒或心理支持</strong><small>針對孩子自身的情緒調適、遊戲治療或心理陪伴。</small></span></label>
+                  </div>
+                </fieldset>
+                <fieldset class="choice-group">
+                  <legend>家庭與生活資源</legend>
+                  <div class="choice-list">
+                    <label class="option-card"><input type="checkbox" name="l2" value="L2-07">
+                      <span class="option-body"><strong>尋找教養建議、照顧者支持或家長交流</strong><small>親職諮詢、家長成長團體或同路人經驗交流。</small></span></label>
+                    <label class="option-card"><input type="checkbox" name="l2" value="L2-08">
+                      <span class="option-body"><strong>尋找費用、交通、福利或附近可聯絡的資源</strong><small>家庭社福窗口、免費課輔陪讀與經濟補助諮詢。</small></span></label>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="pdis-wizard-footer">
+                <div class="pdis-btn-row">
+                  <span class="selection-note" id="selection2">尚未選擇</span>
+                  <button type="button" id="clearStep2Btn" class="btn pdis-btn-outline">清空選項</button>
+                </div>
+                <div class="pdis-btn-row">
+                  <button type="button" id="backTo1Btn" class="btn pdis-btn-outline">上一步</button>
+                  <button type="button" id="toStep3Btn" class="btn btn-brand">下一步：選地區 <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div id="step-3" class="wizard-step" hidden>
+              <h3 id="step3Heading" tabindex="-1" class="pdis-step-title">你想在哪個地區找資源？</h3>
+              <p class="pdis-step-desc">選居住縣市可查附近有哪些窗口。若服務依就學地辦理，請另選孩子就讀學校的縣市。</p>
+
+              <div class="pdis-location-stack">
+                <div class="field">
+                  <label for="countySelect">居住縣市</label>
+                  <select id="countySelect" name="county" class="pdis-select">
+                    <option value="ALL">全部縣市</option>
+                    <option value="臺北市">臺北市</option>
+                    <option value="新北市">新北市</option>
+                    <option value="基隆市">基隆市</option>
+                    <option value="桃園市">桃園市</option>
+                    <option value="新竹市">新竹市</option>
+                    <option value="新竹縣">新竹縣</option>
+                    <option value="苗栗縣">苗栗縣</option>
+                    <option value="臺中市">臺中市</option>
+                    <option value="彰化縣">彰化縣</option>
+                    <option value="南投縣">南投縣</option>
+                    <option value="雲林縣">雲林縣</option>
+                    <option value="嘉義市">嘉義市</option>
+                    <option value="嘉義縣">嘉義縣</option>
+                    <option value="臺南市">臺南市</option>
+                    <option value="高雄市">高雄市</option>
+                    <option value="屏東縣">屏東縣</option>
+                    <option value="宜蘭縣">宜蘭縣</option>
+                    <option value="花蓮縣">花蓮縣</option>
+                    <option value="臺東縣">臺東縣</option>
+                    <option value="澎湖縣">澎湖縣</option>
+                    <option value="金門縣">金門縣</option>
+                    <option value="連江縣">連江縣</option>
+                  </select>
+                </div>
+
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="includeNational" name="includeNational" checked>
+                  <span>也找全國性／跨區資源</span>
+                </label>
+
+                <div class="field" id="schoolCountyField">
+                  <label for="schoolCountySelect">孩子就讀學校所在縣市（選填；部分學校轉介資源依就學地判斷）</label>
+                  <select id="schoolCountySelect" name="schoolCounty" class="pdis-select">
+                    <option value="UNKNOWN" selected>尚未提供／不確定</option>
+                    <option value="SAME">與居住縣市相同</option>
+                  </select>
+                </div>
+
+              </div>
+
+              <div class="pdis-wizard-footer">
+                <button type="button" id="backTo2Btn" class="btn pdis-btn-outline">上一步</button>
+                <button type="submit" class="btn btn-brand">查看對應路徑與機構 <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="resultsSection" class="results-section" aria-labelledby="resultsHeading" hidden>
+      <div class="pdis-panel pdis-results-top">
+        <div class="pdis-panel-head">
+          <h2 id="resultsHeading" tabindex="-1" class="pdis-panel-title">可以先聯繫的資源</h2>
+          <div class="pdis-btn-row">
+            <a class="btn pdis-btn-outline" id="resultJump" href="#recordStart">跳到服務名錄 <i class="bi bi-arrow-down" aria-hidden="true"></i></a>
+            <button type="button" id="restartWizardBtn" class="btn pdis-btn-outline">修改條件</button>
+          </div>
+        </div>
+        <div class="pdis-panel-body">
+          <p id="activeSummary" class="results-summary" role="status"></p>
+        </div>
+      </div>
+
+      <div class="pdis-disclosures">
+        <details id="resultFilters" class="pdis-disclosure">
+          <summary><i class="bi bi-sliders" aria-hidden="true"></i> 搜尋與調整條件</summary>
+          <div class="pdis-disclosure-body">
+            <search aria-label="篩選支持資源">
+              <form id="refineForm" class="refine-grid">
+                <div class="field">
+                  <label for="keywordInput">搜尋關鍵字</label>
+                  <input type="search" id="keywordInput" name="q" class="pdis-input" placeholder="輸入機構名稱、地區或服務" autocomplete="off" spellcheck="false">
+                </div>
+                <div class="field">
+                  <label for="filterCounty">居住縣市</label>
+                  <select id="filterCounty" name="filterCounty" class="pdis-select"></select>
+                </div>
+                <div class="field" id="refineSchoolCountyField">
+                  <label for="filterSchoolCounty">就讀學校縣市</label>
+                  <select id="filterSchoolCounty" name="filterSchoolCounty" class="pdis-select"></select>
+                </div>
+                <div class="field">
+                  <label for="filterCategory">機構類型</label>
+                  <select id="filterCategory" name="filterCategory" class="pdis-select"><option value="ALL">全部類型</option></select>
+                </div>
+                <div class="field">
+                  <label for="filterFree">免費服務</label>
+                  <select id="filterFree" name="filterFree" class="pdis-select">
+                    <option value="ALL">全部</option>
+                    <option value="FREE">有免費服務</option>
+                    <option value="PAID">健保或自費</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="filterOwnership">公私立</label>
+                  <select id="filterOwnership" name="filterOwnership" class="pdis-select">
+                    <option value="ALL">全部</option>
+                    <option value="公立">公立</option>
+                    <option value="私立">私立</option>
+                  </select>
+                </div>
+                <div class="filter-actions">
+                  <label class="checkbox-inline"><input type="checkbox" id="resultsNational" checked><span>包含全國性／跨區資源</span></label>
+                  <button type="button" class="btn pdis-btn-outline" id="clearFiltersBtn">清除全部條件</button>
+                </div>
+              </form>
+            </search>
+            <div class="pdis-quick-goals">
+              <h3>希望獲得的協助（可複選）</h3>
+              <div id="quickL2Bar" class="pdis-quick-bar" role="group" aria-label="調整希望獲得的協助"></div>
+            </div>
+          </div>
+        </details>
+
+        <details id="resultPreparation" class="pdis-disclosure">
+          <summary><i class="bi bi-card-checklist" aria-hidden="true"></i> 聯絡前準備</summary>
+          <div id="nextStepsCard" class="pdis-disclosure-body">
+            <p id="contactQuestions" class="pdis-alert pdis-alert-info"><strong>可以先問窗口：</strong>「我的孩子是否符合年齡、戶籍或就學地條件？最近的服務地點在哪裡、交通怎麼走？需要誰轉介？目前的名額、等候時間和費用是多少？」</p>
+            <div id="nextStepsBody" class="pdis-next-steps"></div>
+          </div>
+        </details>
+      </div>
+
+      <div id="recordStart" class="result-directory" role="region" aria-label="服務名錄" tabindex="-1">
+        <div class="pdis-group-bar" role="group" aria-label="結果分組方式">
+          <span class="small fw-semibold">分組方式：</span>
+          <button type="button" class="quick-l2-btn is-selected" data-groupby="free" aria-pressed="true">依是否有免費服務</button>
+          <button type="button" class="quick-l2-btn" data-groupby="ownership" aria-pressed="false">依公私立</button>
+        </div>
+        <div id="resourceGroups">
+          <section id="groupA" class="result-group" aria-labelledby="groupAHeading">
+            <div class="group-header">
+              <h3 id="groupAHeading" class="group-title">
+                <span id="groupABadge" class="badge pdis-badge-pos">免費</span>
+                <span id="groupATitleText">有免費服務</span> <span id="groupACount" class="badge pdis-count-badge">0</span>
+              </h3>
+              <p id="groupADesc" class="group-desc">包含免費諮詢、免費課後陪讀、公部門免費窗口或公益方案，實際資格與名額請向機構確認。</p>
+            </div>
+            <div id="groupAGrid" class="cards-grid"></div>
+            <div class="pdis-more-wrap">
+              <button type="button" id="groupAMore" class="btn pdis-btn-outline" aria-controls="groupAGrid" hidden>顯示更多</button>
+            </div>
+          </section>
+
+          <section id="groupB" class="result-group" aria-labelledby="groupBHeading">
+            <div class="group-header">
+              <h3 id="groupBHeading" class="group-title">
+                <span id="groupBBadge" class="badge pdis-badge-warn">收費</span>
+                <span id="groupBTitleText">健保或自費服務</span> <span id="groupBCount" class="badge pdis-badge-muted">0</span>
+              </h3>
+              <p id="groupBDesc" class="group-desc">依各醫療院所健保規定或民間機構自費標準收費，實際費用請先向窗口詢問。</p>
+            </div>
+            <div id="groupBGrid" class="cards-grid"></div>
+            <div class="pdis-more-wrap">
+              <button type="button" id="groupBMore" class="btn pdis-btn-outline" aria-controls="groupBGrid" hidden>顯示更多</button>
+            </div>
+          </section>
+        </div>
+
+        <div id="emptyState" class="pdis-panel pdis-empty" hidden>
+          <h3>找不到符合條件的資源</h3>
+          <p>目前名錄沒有列出符合這組條件的入口。可調整縣市、納入跨區資源，或放寬關鍵字再找。</p>
+          <button type="button" class="btn btn-brand" id="emptyClearBtn">查看全部資源 <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="referencesSection" class="pdis-panel pdis-refs-section" aria-labelledby="refsHeading">
+      <div class="pdis-panel-head">
+        <h2 id="refsHeading" class="pdis-panel-title">免責聲明與參考資料</h2>
+      </div>
+      <div class="pdis-panel-body pdis-refs-grid">
+        <div class="pdis-disclaimer-box">
+          <h3 class="h6 fw-bold">網站免責聲明</h3>
+          <ul>
+            <li><strong>非醫療診斷與評估工具</strong>：目前問卷中的日常困難與協助選項屬研究與服務設計草案，僅供釐清需求與導航公開資源，不能據此判定孩子的診斷，亦不提供治療建議或收費轉介。</li>
+            <li><strong>個人資料保護</strong>：所有篩選均於您的裝置瀏覽器本機即時計算，本網站不蒐集、不上傳、不儲存任何兒童姓名、就診紀錄或健康資訊。</li>
+            <li><strong>資格與名額限制</strong>：「附近有這項服務」不等於「目前符合資格或有名額」。實際服務年齡、戶籍／就學地限制、轉介要求與費用，請以各機構最新公告與窗口回覆為準。</li>
+          </ul>
+        </div>
+        <div class="pdis-refs-box">
+          <h3 class="h6 fw-bold">參考資料與來源依據（僅供分類參考，非問卷效度證明）</h3>
+          <ol>
+            <li>教育部，《特殊教育學生及幼兒鑑定辦法》（<a href="https://edu.law.moe.gov.tw/LawContent.aspx?id=FL009187" target="_blank" rel="noopener noreferrer">法規原文 ↗</a>）。</li>
+            <li>教育部，《學生輔導法》（<a href="https://edu.law.moe.gov.tw/LawContent.aspx?id=GL001380" target="_blank" rel="noopener noreferrer">法規原文 ↗</a>）。</li>
+            <li>衛生福利部社會及家庭署，〈社會福利服務中心提供甚麼服務呢？〉（<a href="https://topics.mohw.gov.tw/SS/cp-4530-50091-204.html" target="_blank" rel="noopener noreferrer">官方頁面 ↗</a>）；保護服務司 113 專線說明（<a href="https://dep.mohw.gov.tw/DOPs/fp-1183-6499-105.html" target="_blank" rel="noopener noreferrer">官方頁面 ↗</a>）。</li>
+            <li>Wolraich et al. (2019), <em>Clinical Practice Guideline for ADHD</em>, <em>Pediatrics</em> (<a href="https://publications.aap.org/pediatrics/article/144/4/e20192528/81590/Clinical-Practice-Guideline-for-the-Diagnosis" target="_blank" rel="noopener noreferrer">AAP ↗</a>).</li>
+            <li>廖晨惠等（2014），〈國小學童詞素覺識、聲韻覺識、字形處理能力與中文字詞認讀能力之相關研究〉，《測驗學刊》61(4)（<a href="https://teric.naer.edu.tw/wSite/ct?ctNode=638&mp=teric_g&xItem=1826272" target="_blank" rel="noopener noreferrer">TERIC ↗</a>）。</li>
+            <li>Hwang et al. (2024), <em>Kindergarten Visual-Perceptual and Motor Skills... Chinese Handwriting</em>, <em>AJOT</em> (<a href="https://pubmed.ncbi.nlm.nih.gov/38165221" target="_blank" rel="noopener noreferrer">PubMed ↗</a>).</li>
+            <li>Gioia et al. (2002), <em>BRIEF Confirmatory Factor Analysis</em>, <em>Child Neuropsychology</em> (<a href="https://pubmed.ncbi.nlm.nih.gov/12759822" target="_blank" rel="noopener noreferrer">PubMed ↗</a>); Yang et al. (2026), <em>SDQ in Central Taiwan</em> (<a href="https://hub.tmu.edu.tw/en/publications/psychometric-evaluation-of-the-strengths-and-difficulties-questio" target="_blank" rel="noopener noreferrer">TMU Hub ↗</a>).</li>
+            <li>ASHA Practice Portal: <a href="https://www.asha.org/practice-portal/clinical-topics/spoken-language-disorders" target="_blank" rel="noopener noreferrer">Spoken Language Disorders ↗</a> &amp; <a href="https://www.asha.org/practice-portal/clinical-topics/written-language-disorders" target="_blank" rel="noopener noreferrer">Written Language Disorders ↗</a>.</li>
+            <li>各縣市特教資源中心、學生輔導諮商中心、家庭教育中心、社福中心、社區心理衛生中心、醫療院所及公益團體公開網站（查閱日期見各筆紀錄），以及 <a href="https://github.com/PDIS/design-system" target="_blank" rel="noopener noreferrer">PDIS Design System ↗</a>。</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pdis-footer">
+    <div class="pdis-container pdis-footer-inner">
+      <p><strong>童路 ChildPath</strong>（採用 <a href="https://github.com/PDIS/design-system" target="_blank" rel="noopener noreferrer">PDIS Design System</a>）· 家庭支持資源導航原型（研究草案，非診斷工具）</p>
+      <p>資料查閱日見各筆紀錄 <span id="dataUpdatedAt"></span>· 公開資源索引，僅供查詢。</p>
+    </div>
+  </footer>
+
+  <dialog id="legalDialog" closedby="any" aria-labelledby="legalDialogTitle" class="pdis-dialog">
+    <form method="dialog" class="dialog-form">
+      <div class="pdis-dialog-head">
+        <h2 id="legalDialogTitle">隱私保護與研究草案說明</h2>
+        <button type="submit" class="btn pdis-btn-outline" aria-label="關閉視窗">✕</button>
+      </div>
+      <div class="pdis-dialog-body">
+        <h3>1. 你的選擇如何使用</h3>
+        <p>本網站採用純靜態前端架構，所有勾選條件均僅在您的裝置瀏覽器內即時計算，<strong>不會傳送至伺服器，也不會記錄或儲存任何兒童姓名、就診紀錄或健康資訊</strong>。</p>
+        <h3>2. 題目與資料的用途</h3>
+        <p>目前問卷中的日常困難與協助選項屬研究設計草案，尚未完成正式家長認知訪談與信效度驗證。本網站僅供釐清需求與導航公開資源，<strong>不能據此判定孩子的診斷</strong>，亦不提供治療建議或收費轉介。</p>
+        <h3>3. 資源媒合邊界與當期資格限制</h3>
+        <p>「附近有這項服務」不等於「目前一定符合資格」。每筆紀錄標示所用資料的查閱日。實際收案學段、年齡、戶籍或就學地限制、轉介程序與名額，請向機構確認。</p>
+      </div>
+      <div class="pdis-dialog-foot">
+        <button type="submit" class="btn btn-brand">我已了解</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="feedbackDialog" closedby="any" aria-labelledby="feedbackDialogTitle" class="pdis-dialog">
+    <form id="feedbackForm" class="dialog-form">
+      <div class="pdis-dialog-head">
+        <h2 id="feedbackDialogTitle">匿名意見回饋</h2>
+        <button type="button" id="closeFeedbackBtn" class="btn pdis-btn-outline" aria-label="關閉視窗">✕</button>
+      </div>
+      <div class="pdis-dialog-body">
+        <p class="pdis-alert pdis-alert-info">本表單<strong>完全匿名</strong>，不會要求登入或記錄身分。請勿填寫姓名、電話、Email、孩子或學校名稱。</p>
+        <div class="field" style="margin-top:.75rem;">
+          <label for="fbType">回饋類型</label>
+          <select id="fbType" name="fbType" class="pdis-select">
+            <option value="ux">題目文字或操作體驗建議</option>
+            <option value="data_update">機構資訊異動回報（電話、網址、服務異動）</option>
+            <option value="recommend">推薦機構</option>
+            <option value="other">其他建議</option>
+          </select>
+        </div>
+        <div class="field" style="margin-top:.75rem;">
+          <label for="fbMessage">具體內容（至少 5 個字）</label>
+          <textarea id="fbMessage" name="fbMessage" class="pdis-input" rows="4" minlength="5" maxlength="1000" required placeholder="例如：哪個選項不容易理解，或哪一間機構的公開聯絡方式需要更新…"></textarea>
+        </div>
+        <p id="fbStatus" class="pdis-alert pdis-alert-info" hidden role="status"></p>
+      </div>
+      <div class="pdis-dialog-foot pdis-btn-row" style="justify-content:space-between;">
+        <div class="pdis-btn-row">
+          <button type="button" id="exportFeedbackBtn" class="btn pdis-btn-outline" hidden>匯出本機回饋 (JSON)</button>
+          <button type="button" id="clearFeedbackBtn" class="btn pdis-btn-outline" hidden>清空回饋</button>
+        </div>
+        <button type="submit" class="btn btn-brand">送出匿名回饋</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
