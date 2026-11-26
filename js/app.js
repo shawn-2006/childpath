@@ -181,6 +181,7 @@
     filterSchoolCounty.value = schoolCounty.value;
     resultsNational.checked = national.checked;
     wizard.hidden = true;
+    if (byId('referencesSection')) byId('referencesSection').hidden = true;
     if (!keepFiltersOpen) byId('resultFilters').open = false;
     byId('resultPreparation').open = false;
     results.hidden = false;
@@ -518,6 +519,7 @@
     function returnToGuide() {
       results.hidden = true;
       wizard.hidden = false;
+      if (byId('referencesSection')) byId('referencesSection').hidden = false;
       goToStep(1);
     }
     byId('restartWizardBtn').addEventListener('click', returnToGuide);
