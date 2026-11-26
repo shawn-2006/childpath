@@ -1,4 +1,4 @@
-name: Deploy ChildPath to GitHub Pages
+name: Deploy OneKindKnock to GitHub Pages
 
 on:
   push:

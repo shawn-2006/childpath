@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-童路 ChildPath 資料驗證與同步腳本
+問路鈴｜OneKindKnock 資料驗證與同步腳本
 用途：每次更新 data/services.min.json（或從外部 JSON 匯入）後執行，
       自動檢查必填欄位、去重統計、更新 generated_at，並同步產生 data/offline.js。
 用法：python3 scripts/build_data.py

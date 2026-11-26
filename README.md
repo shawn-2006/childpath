@@ -1,4 +1,4 @@
-# 童路 ChildPath｜GitHub Pages 上線與持續更新指南
+# 問路鈴｜OneKindKnock — GitHub Pages 上線與持續更新指南
 
 本資料夾為**純靜態網站**，所有路徑皆為相對路徑，已備妥 `.nojekyll` 與 `.github/workflows/deploy-pages.yml`，可直接推送到 GitHub 並透過 GitHub Pages 上線。
 
@@ -9,7 +9,7 @@
    ```sh
    git init
    git add .
-   git commit -m "feat: initial ChildPath site"
+   git commit -m "feat: initial OneKindKnock site"
    git branch -M main
    git remote add origin https://github.com/<你的帳號>/<你的repo>.git
    git push -u origin main

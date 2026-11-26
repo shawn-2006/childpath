@@ -138,7 +138,7 @@
         ? '無法載入資源名錄。請確認網站資料夾完整，再試一次。'
         : '無法載入資源名錄。請檢查網路連線，再試一次。';
       retry.hidden = false;
-      console.error('ChildPath resource index', error);
+      console.error('OneKindKnock resource index', error);
     } finally {
       results.removeAttribute('aria-busy');
     }
@@ -658,7 +658,7 @@
       const blob = new Blob([JSON.stringify(readFb(), null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = 'childpath-anonymous-feedback.json';
+      a.download = 'OneKindKnock-anonymous-feedback.json';
       a.click();
       URL.revokeObjectURL(a.href);
     });

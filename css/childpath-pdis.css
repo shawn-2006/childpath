@@ -89,6 +89,10 @@ button, input, select {
   font-size: 1.1rem;
 }
 
+.pdis-brand-name {
+  white-space: nowrap;
+}
+
 .pdis-brand-zh {
   font-size: 1.35rem;
   font-weight: 700;
@@ -108,6 +112,12 @@ button, input, select {
   font-weight: 600;
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
+}
+
+@media (max-width: 380px) {
+  .pdis-brand-btn { gap: 0.3rem; }
+  .pdis-brand-zh { font-size: 1.15rem; }
+  .pdis-brand-en { font-size: 0.9rem; }
 }
 
 .pdis-btn-outline {
