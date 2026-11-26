@@ -572,7 +572,16 @@
     const fbStatus = byId('fbStatus');
     const exportBtn = byId('exportFeedbackBtn');
     const clearFbBtn = byId('clearFeedbackBtn');
+    const fbSubmitBtn = fbForm?.querySelector('button[type="submit"]');
     const FB_KEY = 'childpath_anonymous_feedback_v1';
+    // Configure either a Formspree/JSON endpoint OR a Google Forms formResponse endpoint:
+    // e.g. { mode: 'formspree', url: 'https://formspree.io/f/XXXXXXXX' }
+    //   or { mode: 'google_form', url: 'https://docs.google.com/forms/d/e/.../formResponse', fields: { type: 'entry.111', message: 'entry.222' } }
+    const FEEDBACK_CONFIG = {
+      mode: 'formspree',
+      url: 'https://formspree.io/f/mdegbjdw',
+      fields: { type: '', message: '' }
+    };
     const readFb = () => {
       try { return JSON.parse(localStorage.getItem(FB_KEY) || '[]'); } catch { return []; }
     };
@@ -595,20 +604,47 @@
             event.clientY < rect.top || event.clientY > rect.bottom) fbDialog.close();
       });
     }
-    fbForm?.addEventListener('submit', (event) => {
+    fbForm?.addEventListener('submit', async (event) => {
       event.preventDefault();
       const entry = {
         submitted_at: new Date().toISOString(),
         type: byId('fbType').value,
+        type_label: byId('fbType').selectedOptions[0]?.textContent || byId('fbType').value,
         message: byId('fbMessage').value.trim()
       };
-      const list = readFb();
-      list.push(entry);
-      try { localStorage.setItem(FB_KEY, JSON.stringify(list)); } catch {}
-      fbForm.reset();
-      fbStatus.textContent = '已收到您的匿名回饋（目前為本機預覽模式，紀錄已暫存於此裝置，共 ' + list.length + ' 筆）。';
-      fbStatus.hidden = false;
-      syncFbButtons();
+      if (fbSubmitBtn) fbSubmitBtn.disabled = true;
+      try {
+        if (FEEDBACK_CONFIG.mode === 'google_form' && FEEDBACK_CONFIG.url) {
+          const body = new FormData();
+          body.append(FEEDBACK_CONFIG.fields.type, entry.type_label);
+          body.append(FEEDBACK_CONFIG.fields.message, entry.message);
+          await fetch(FEEDBACK_CONFIG.url, { method: 'POST', mode: 'no-cors', body });
+          fbForm.reset();
+          fbStatus.textContent = '已送出匿名回饋，感謝您的分享！';
+        } else if (FEEDBACK_CONFIG.mode === 'formspree' && FEEDBACK_CONFIG.url) {
+          const resp = await fetch(FEEDBACK_CONFIG.url, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 回饋類型: entry.type_label, 具體內容: entry.message, 送出時間: entry.submitted_at })
+          });
+          if (!resp.ok) throw new Error('HTTP ' + resp.status);
+          fbForm.reset();
+          fbStatus.textContent = '已送出匿名回饋，感謝您的分享！';
+        } else {
+          const list = readFb();
+          list.push(entry);
+          try { localStorage.setItem(FB_KEY, JSON.stringify(list)); } catch {}
+          fbForm.reset();
+          fbStatus.textContent = '已收到您的匿名回饋（尚未設定遠端接收端點，目前暫存於此裝置，共 ' + list.length + ' 筆）。';
+          syncFbButtons();
+        }
+      } catch (err) {
+        fbStatus.textContent = '送出時發生網路錯誤，請稍後再試。';
+        console.error('Feedback submit error', err);
+      } finally {
+        fbStatus.hidden = false;
+        if (fbSubmitBtn) fbSubmitBtn.disabled = false;
+      }
     });
     clearFbBtn?.addEventListener('click', () => {
       try { localStorage.removeItem(FB_KEY); } catch {}
