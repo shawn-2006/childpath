@@ -105,15 +105,6 @@ button, input, select {
   color: #475569;
 }
 
-.pdis-preview-badge {
-  background-color: var(--brand-flat, #d8e2ff);
-  color: var(--on-brand-flat, #001847);
-  font-size: 0.74rem;
-  font-weight: 600;
-  padding: 0.2rem 0.55rem;
-  border-radius: 999px;
-}
-
 @media (max-width: 380px) {
   .pdis-brand-btn { gap: 0.3rem; }
   .pdis-brand-zh { font-size: 1.15rem; }
